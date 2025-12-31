@@ -2,16 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Tura ✨</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;800&display=swap');
+
         body, html {
             margin: 0; padding: 0; width: 100%; height: 100%;
-            overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; font-family: 'Poppins', sans-serif;
             display: flex; justify-content: center; align-items: center;
             background: linear-gradient(-45deg, #87CEEB, #FFB6C1, #B0E0E6, #FFC0CB);
             background-size: 400% 400%;
             animation: gradientBG 10s ease infinite;
+            touch-action: none;
         }
 
         @keyframes gradientBG {
@@ -20,100 +23,139 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Sparkle Style (Optimized for Touch) */
+        .sparkle {
+            position: absolute; width: 8px; height: 8px; border-radius: 50%;
+            pointer-events: none; z-index: 9999;
+            animation: sparkle-fade 0.8s linear forwards;
+        }
+        @keyframes sparkle-fade {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; margin-top: 20px; }
+        }
+
+        /* Love Falling */
+        .heart-fall {
+            position: absolute; top: -50px; font-size: 22px;
+            color: rgba(255, 182, 193, 0.8);
+            animation: fall linear infinite; z-index: 1;
+        }
+        @keyframes fall {
+            to { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        /* Mobile Responsive Container */
         .container {
-            text-align: center; background: rgba(255, 255, 255, 0.2);
-            padding: 40px; border-radius: 30px;
-            backdrop-filter: blur(10px); border: 2px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: scaleIn 1s ease-out;
-            z-index: 10;
+            text-align: center; background: rgba(255, 255, 255, 0.25);
+            padding: 40px 25px; border-radius: 35px;
+            backdrop-filter: blur(15px); border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            z-index: 10; width: 80%; max-width: 350px;
         }
 
-        @keyframes scaleIn {
-            0% { transform: scale(0.5); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
+        h1 { color: white; font-size: 1.8rem; margin: 0; font-weight: 300; min-height: 40px; }
+        .bounce-active { animation: bounce 2s infinite; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
-        h1 {
-            color: white; font-size: 2.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 10px; animation: bounce 2s infinite;
+        .name { color: #fff; font-weight: 800; font-size: 3.2rem; display: block; min-height: 80px; text-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        #countdown-box {
+            margin: 15px 0; color: #fff; font-size: 0.9rem; letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.3); padding: 12px; border-radius: 15px;
+            opacity: 0; transition: opacity 1s ease;
         }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .name { color: #fff; font-weight: bold; font-size: 3.5rem; display: block; }
 
         .btn {
-            background: white; color: #FFB6C1; border: none;
-            padding: 15px 35px; font-size: 1.2rem; font-weight: bold;
-            border-radius: 50px; cursor: pointer; transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); margin-top: 20px;
+            background: #fff; color: #FFB6C1; border: none;
+            padding: 15px 35px; font-size: 1.1rem; font-weight: bold;
+            border-radius: 40px; cursor: pointer; transition: 0.4s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); margin-top: 20px;
+            opacity: 0; transform: translateY(15px);
+            -webkit-tap-highlight-color: transparent;
         }
-
-        .btn:hover { transform: scale(1.1); background: #87CEEB; color: white; }
-
-        #wish {
-            display: none; margin-top: 20px; font-size: 1.5rem;
-            color: white; font-weight: 500; line-height: 1.6;
-        }
-
-        /* Heart Animation */
-        .heart {
-            position: absolute; bottom: -100px;
-            font-size: 20px; color: rgba(255, 182, 193, 0.7);
-            animation: floatUp 5s linear infinite; z-index: 1;
-        }
-
-        @keyframes floatUp {
-            to { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
-        }
+        .btn.show { opacity: 1; transform: translateY(0); }
+        #wish { display: none; margin-top: 20px; font-size: 1.4rem; color: white; font-weight: bold; line-height: 1.4; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Hello,</h1>
-    <span class="name">Tura ✨</span>
-    <button class="btn" onclick="celebrate()">Surprise 🎁</button>
-    <div id="wish">
-        🎊 Happy New Year 2026! 🎊 <br>
-        <span style="font-size: 1.1rem;">Wishing you a year as beautiful as your smile! 😊</span>
-    </div>
+    <h1 id="hello-text"></h1>
+    <span class="name" id="name-text"></span>
+    <div id="countdown-box">COUNTDOWN TO 2026 ✨ <br> <span id="time" style="font-size: 1.2rem;"></span></div>
+    <button class="btn" id="surprise-btn" onclick="celebrate()">Surprise 🎁</button>
+    <div id="wish">🎊 Happy New Year 2026! 🎊<br><span style="font-size: 1rem; font-weight: normal; font-style: italic;">"Wishing you a year as beautiful as your smile!" 😊</span></div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
-    function celebrate() {
-        document.getElementById('wish').style.display = 'block';
-        document.querySelector('.btn').style.display = 'none';
-        
-        // Confetti Magic
-        var duration = 5 * 1000;
-        var end = Date.now() + duration;
-
-        (function frame() {
-            confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#87CEEB', '#FFB6C1'] });
-            confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#87CEEB', '#FFB6C1'] });
-
-            if (Date.now() < end) { requestAnimationFrame(frame); }
-        }());
+    // 1. Mobile Optimized Sparkle
+    const colors = ["#FFFFFF", "#FFD700", "#FFB6C1", "#87CEEB"];
+    function createSparkle(e) {
+        const x = e.touches ? e.touches[0].clientX : e.clientX;
+        const y = e.touches ? e.touches[0].clientY : e.clientY;
+        const sparkle = document.createElement("div");
+        sparkle.className = "sparkle";
+        sparkle.style.left = x + "px";
+        sparkle.style.top = y + "px";
+        sparkle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(sparkle);
+        setTimeout(() => sparkle.remove(), 800);
     }
+    window.addEventListener('mousemove', createSparkle);
+    window.addEventListener('touchmove', createSparkle);
 
-    // Creating Floating Hearts
+    // 2. Love Falling
     setInterval(() => {
         const heart = document.createElement('div');
-        heart.classList.add('heart');
+        heart.className = 'heart-fall';
         heart.innerHTML = '❤️';
         heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        heart.style.color = Math.random() > 0.5 ? '#87CEEB' : '#FFB6C1';
+        heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        heart.style.opacity = Math.random();
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 5000);
-    }, 300);
-</script>
+    }, 500);
 
+    // 3. Typing + Bounce
+    function typeEffect(element, text, speed, callback) {
+        let i = 0;
+        const timer = setInterval(() => {
+            if (i < text.length) { element.innerHTML += text.charAt(i); i++; }
+            else { clearInterval(timer); if (callback) callback(); }
+        }, speed);
+    }
+
+    window.onload = () => {
+        typeEffect(document.getElementById('hello-text'), "Hello,", 100, () => {
+            typeEffect(document.getElementById('name-text'), "Tura ✨", 150, () => {
+                document.getElementById('hello-text').classList.add('bounce-active');
+                document.getElementById('countdown-box').style.opacity = "1";
+                document.getElementById('surprise-btn').classList.add('show');
+            });
+        });
+    };
+
+    // 4. Countdown (Target Jan 1, 2026)
+    const target = new Date("Jan 1, 2026 00:00:00").getTime();
+    setInterval(() => {
+        const d = target - new Date().getTime();
+        const days = Math.floor(d / 86400000), hrs = Math.floor((d % 86400000) / 3600000), mins = Math.floor((d % 3600000) / 60000), secs = Math.floor((d % 60000) / 1000);
+        document.getElementById("time").innerHTML = `${days}d ${hrs}h ${mins}m ${secs}s`;
+    }, 1000);
+
+    // 5. Celebration
+    function celebrate() {
+        document.getElementById('wish').style.display = 'block';
+        document.getElementById('countdown-box').style.display = 'none';
+        document.getElementById('surprise-btn').style.display = 'none';
+        var end = Date.now() + 4000;
+        (function frame() {
+            confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#ffffff', '#ffb6c1'] });
+            confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#ffffff', '#ffb6c1'] });
+            if (Date.now() < end) requestAnimationFrame(frame);
+        }());
+    }
+</script>
 </body>
 </html>
